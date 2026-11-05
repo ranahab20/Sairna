@@ -20,7 +20,7 @@ function SectionHeading({
 
   // 2. مصفوفة المحاذاة (معدلة عشان الـ RTL)
   const alignStyles = {
-    right: "items-end text-right",
+    right: "items-start text-right",
     center: "items-center text-center",
   };
 
