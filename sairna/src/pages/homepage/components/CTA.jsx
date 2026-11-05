@@ -35,7 +35,7 @@ function CTA() {
         
         <div className="relative z-10 shrink-0">
           <button 
-            onClick={() => navigate('/results')}
+            onClick={() => navigate('/booking')}
             className="flex items-center gap-2 bg-white text-dark px-6 py-3 rounded-xl font-bold hover:bg-emerald-50 hover:-translate-y-1 transition-all"
           >
             يلا نلاقي رحلة <FaArrowLeft />
