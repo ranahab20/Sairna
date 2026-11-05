@@ -1,6 +1,6 @@
 import { LuCircleDot, LuMenu, LuX } from "react-icons/lu";
 import {
-  IoIosAddCircle,
+  
   IoIosArrowBack,
   IoIosStarOutline,
 } from "react-icons/io";

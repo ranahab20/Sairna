@@ -3,6 +3,7 @@ import Explore from "./components/Explore"
 import Hero from "./components/Hero"
 import SearchBox from "./components/SearchBox"
 import Stats from "./components/Stats"
+import Steps from "./components/Steps"
 
 function Home() {
   return (
@@ -11,6 +12,7 @@ function Home() {
     <SearchBox />
     <Stats/>
     <Explore />
+    <Steps/>
     <CTA/>
     </>
   )
