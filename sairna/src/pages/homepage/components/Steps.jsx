@@ -19,7 +19,7 @@ function Steps() {
             subtitle="ما في داعي للتعقيد. كل شي مرتب بواجهة وحدة."
           ></SectionHeading>
         </div>
-        <div className="grid gap-[20px] relative grid-cols-3 px-[150px] py-[50px]">
+        <div className="grid gap-[20px] relative md:grid-cols-3 md:px-[150px] py-[50px]">
           <StepCard
             icon={<CiSearch size={30} />}
             number="01"
