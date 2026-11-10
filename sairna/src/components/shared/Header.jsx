@@ -1,6 +1,6 @@
 import { LuCircleDot, LuMenu, LuX } from "react-icons/lu";
 import {
-  IoIosAddCircle,
+  
   IoIosArrowBack,
   IoIosStarOutline,
 } from "react-icons/io";
@@ -141,7 +141,7 @@ function Header() {
             color="secondary"
             radius="rounded-xl"
             onClick={() => console.log("Login clicked")}
-            className="hidden md:flex"
+            className="hidden md:flex hover:-translate-y-1"
           >
             تسجيل الدخول
           </Button>
