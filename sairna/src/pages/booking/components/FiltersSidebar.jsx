@@ -8,9 +8,8 @@ function FiltersSidebar({
   setSelectedTime, 
   trips 
 }) {
-  const { data: allCompanies, isLoading: isLoadingCompanies } = useGetCompanies();
+  const { data: allCompanies, isLoading } = useGetCompanies();
 
-  // حساب عدد الرحلات لكل شركة
   const companyCounts = {};
   if (trips) {
     trips.forEach(trip => {
@@ -25,14 +24,13 @@ function FiltersSidebar({
     { id: 'evening', label: 'مساءً (بعد 17)' },
   ];
 
-  if (isLoadingCompanies) return <div className="text-center py-4 text-sm">جاري التحميل...</div>;
+  if (isLoading) return <div className="text-center py-4 text-sm">جاري التحميل...</div>;
 
   return (
-    <div className="bg-surface border border-border rounded-xl p-5 sticky top-24">
+    <div className="bg-surface border border-border rounded-xl p-5">
       
-      {/* رأس الشريط الجانبي */}
       <div className="flex justify-between items-center border-b border-border pb-4 mb-4">
-        <h3 className="font-bold text-text flex items-center gap-2">
+        <h3 className="font-bold flex items-center gap-2">
           <FaFilter className="text-primary" /> تصفية النتائج
         </h3>
         <button 
@@ -46,107 +44,68 @@ function FiltersSidebar({
         </button>
       </div>
 
-      {/* فلترة الشركات */}
       <div className="mb-6">
-        <h4 className="font-bold text-sm text-text mb-3">شركة النقل</h4>
+        <h4 className="font-bold text-sm mb-3">شركة النقل</h4>
         <div className="flex flex-col gap-3">
           
-          {/* خيار كل الشركات */}
-          <div className="flex items-center gap-3 group">
+          {/* كل الشركات */}
+          <label className="flex items-center gap-3 cursor-pointer">
             <input 
               type="radio" 
-              id="company-all"
               name="company" 
               value="all"
-              checked={selectedCompany === 'all'}
+              checked={selectedCompany?.toString() === 'all'}
               onChange={(e) => setSelectedCompany(e.target.value)}
-              className="hidden"
+              className="appearance-none w-4 h-4 rounded-full border-2 border-border cursor-pointer checked:bg-primary checked:border-primary transition-all"
             />
-            <label htmlFor="company-all" className="flex items-center gap-3 cursor-pointer flex-1">
-              <div 
-                className="w-4 h-4 rounded-full border-2 flex items-center justify-center transition-all duration-200"
-                style={{ 
-                  borderColor: selectedCompany === 'all' ? 'var(--color-primary)' : 'var(--color-border)',
-                  backgroundColor: selectedCompany === 'all' ? 'var(--color-primary)' : 'transparent'
-                }}
-              >
-                {selectedCompany === 'all' && <div className="w-1.5 h-1.5 rounded-full bg-white"></div>}
-              </div>
-              <span className="text-sm text-text flex-1 group-hover:text-primary transition-colors">كل الشركات</span>
-            </label>
+            <span className="text-sm flex-1 text-text">كل الشركات</span>
             <span className="text-xs text-muted bg-surface-alt px-2 py-0.5 rounded-md">{trips?.length || 0}</span>
-          </div>
+          </label>
 
-          {/* باقي الشركات */}
+          {/* باقي الشركات - هنا السر في toString() */}
           {allCompanies?.map((company) => (
-            <div key={company.id} className="flex items-center gap-3 group">
+            <label key={company.id} className="flex items-center gap-3 cursor-pointer">
               <input 
                 type="radio" 
-                id={`company-${company.id}`}
                 name="company" 
                 value={company.id}
-                checked={selectedCompany === company.id}
+                checked={selectedCompany?.toString() === company.id?.toString()}
                 onChange={(e) => setSelectedCompany(e.target.value)}
-                className="hidden"
+                className="appearance-none w-4 h-4 rounded-full border-2 border-border cursor-pointer checked:bg-primary checked:border-primary transition-all"
               />
-              <label htmlFor={`company-${company.id}`} className="flex items-center gap-3 cursor-pointer flex-1">
-                <div 
-                  className="w-4 h-4 rounded-full border-2 flex items-center justify-center transition-all duration-200"
-                  style={{ 
-                    borderColor: selectedCompany === company.id ? 'var(--color-primary)' : 'var(--color-border)',
-                    backgroundColor: selectedCompany === company.id ? 'var(--color-primary)' : 'transparent'
-                  }}
-                >
-                  {selectedCompany === company.id && <div className="w-1.5 h-1.5 rounded-full bg-white"></div>}
-                </div>
-                <span className="text-sm text-text flex-1 group-hover:text-primary transition-colors">{company.name}</span>
-              </label>
+              <span className="text-sm flex-1 text-text">{company.name}</span>
               <span className="text-xs text-muted bg-surface-alt px-2 py-0.5 rounded-md">
                 {companyCounts[company.id] || 0}
               </span>
-            </div>
+            </label>
           ))}
         </div>
       </div>
 
-      {/* فلترة وقت الانطلاق */}
       <div className="mb-6">
-        <h4 className="font-bold text-sm text-text mb-3">وقت الانطلاق</h4>
+        <h4 className="font-bold text-sm mb-3">وقت الانطلاق</h4>
         <div className="flex flex-col gap-3">
           {timeOptions.map((time) => (
-            <div key={time.id} className="flex items-center gap-3 group">
+            <label key={time.id} className="flex items-center gap-3 cursor-pointer">
               <input 
                 type="radio" 
-                id={`time-${time.id}`}
                 name="time" 
                 value={time.id}
                 checked={selectedTime === time.id}
                 onChange={(e) => setSelectedTime(e.target.value)}
-                className="hidden"
+                className="appearance-none w-4 h-4 rounded-full border-2 border-border cursor-pointer checked:bg-primary checked:border-primary transition-all"
               />
-              <label htmlFor={`time-${time.id}`} className="flex items-center gap-3 cursor-pointer flex-1">
-                <div 
-                  className="w-4 h-4 rounded-full border-2 flex items-center justify-center transition-all duration-200"
-                  style={{ 
-                    borderColor: selectedTime === time.id ? 'var(--color-primary)' : 'var(--color-border)',
-                    backgroundColor: selectedTime === time.id ? 'var(--color-primary)' : 'transparent'
-                  }}
-                >
-                  {selectedTime === time.id && <div className="w-1.5 h-1.5 rounded-full bg-white"></div>}
-                </div>
-                <span className="text-sm text-text group-hover:text-primary transition-colors">{time.label}</span>
-              </label>
-            </div>
+              <span className="text-sm text-text">{time.label}</span>
+            </label>
           ))}
         </div>
       </div>
-
-      {/* صندوق توضيحي */}
+      
       <div className="bg-soft-teal/50 border border-soft-teal rounded-lg p-3 flex items-start gap-2">
         <FaShieldAlt className="text-primary mt-0.5 shrink-0" />
         <div>
           <h5 className="text-xs font-bold text-primary-deep">الحجز بشكل واضح</h5>
-          <p className="text-[10px] text-muted mt-1 leading-relaxed">كل تفاصيل الرحلة قدامك قبل التأكيد.</p>
+          <p className="text-[10px] text-muted mt-1">كل تفاصيل الرحلة قدامك قبل التأكيد.</p>
         </div>
       </div>
 

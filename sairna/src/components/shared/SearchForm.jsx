@@ -1,14 +1,16 @@
 import { useState, useEffect } from 'react';
-import { useNavigate, useSearchParams } from 'react-router-dom'; // ضيفنا useSearchParams
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { FaMapMarkerAlt, FaExchangeAlt, FaCalendarAlt, FaUsers, FaSearch } from 'react-icons/fa';
 import Button from '../shared/Button'; 
 import { useGetCities } from '../../api/cities'; 
 
 function SearchForm() {
   const navigate = useNavigate();
-  const [searchParams] = useSearchParams(); // عشان نقرأ من الرابط
-
+  const [searchParams] = useSearchParams(); 
   const { data: cities, isLoading } = useGetCities();
+
+  // 1. إضافة حالة الخطأ
+  const [error, setError] = useState('');
 
   const [searchData, setSearchData] = useState({
     from: '', 
@@ -18,35 +20,27 @@ function SearchForm() {
   });
 
   useEffect(() => {
-    // 1. بنشوف إذا في وجهة جاية بالرابط (لما يضغط على كرت)
     const destFromUrl = searchParams.get('to');
-    
-    // 2. بنجيب البيانات المحفوظة
     const saved = localStorage.getItem('sairnaSearchData');
     const selectedDest = localStorage.getItem('selectedDestination');
 
     if (saved) {
       let data = JSON.parse(saved);
       
-      // إذا في وجهة بالرابط، هي اللي بتغلب
       if (destFromUrl) {
         data.to = destFromUrl;
         localStorage.setItem('sairnaSearchData', JSON.stringify(data));
         localStorage.removeItem('selectedDestination');
-      } 
-      // إذا ما في بالرابط، بنشوف الـ LocalStorage
-      else if (selectedDest) {
+      } else if (selectedDest) {
         data.to = selectedDest;
         localStorage.removeItem('selectedDestination'); 
         localStorage.setItem('sairnaSearchData', JSON.stringify(data));
       }
       
       setSearchData(data);
-    } 
-    // إذا ما في ولا شي محفوظ، بنحط أول مدينتين من الـ API
-    else if (cities && cities.length > 0) {
+    } else if (cities && cities.length > 0) {
       const initialData = {
-        from: destFromUrl ? cities[0].id : cities[0].id, // ممكن نعدلها بعدين
+        from: destFromUrl ? cities[0].id : cities[0].id,
         to: destFromUrl || (cities[1] ? cities[1].id : cities[0].id),
         date: '',
         passengers: '1'
@@ -54,7 +48,7 @@ function SearchForm() {
       setSearchData(initialData);
       localStorage.setItem('sairnaSearchData', JSON.stringify(initialData));
     }
-  }, [cities, searchParams]); // ضيفنا searchParams عشان يشتغل لما الرابط يتغير
+  }, [cities, searchParams]); 
 
   const updateDataAndSave = (newData) => {
     setSearchData(newData);
@@ -71,8 +65,15 @@ function SearchForm() {
 
   const handleSearch = (e) => {
     e.preventDefault();
+    
+    // 2. التحقق من الشرط قبل البحث
+    if (searchData.from === searchData.to) {
+      setError('لا يمكن أن تكون نقطة الانطلاق والوجهة نفس المدينة.');
+      return; 
+    }
+    
+    setError(''); // مسح الخطأ إذا كان كل شي تمام
     const params = new URLSearchParams(searchData);
-    // بننقل لصفحة الحجز بنفس الطريقة
     navigate(`/booking?${params.toString()}`); 
   };
 
@@ -143,6 +144,13 @@ function SearchForm() {
       >
         <FaSearch /> ابحث عن رحلات
       </Button>
+
+      {/* 3. عرض رسالة الخطأ */}
+      {error && (
+        <div className="col-span-full text-red-500 text-sm font-bold mt-2">
+          {error}
+        </div>
+      )}
 
     </form>
   );
