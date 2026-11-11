@@ -1,7 +1,8 @@
 import { useNavigate } from 'react-router-dom';
 import { FaBus, FaStar, FaSnowflake, FaWifi, FaUsb, FaArrowLeft, FaChair } from 'react-icons/fa';
 
-function TripCard({ trip }) {
+function TripCard({ trip,passengerCount=1 }) {
+  
   const navigate = useNavigate();
 
   const formatTime = (dateString) => {
@@ -25,7 +26,7 @@ function TripCard({ trip }) {
   };
 
   const handleSelectSeats = () => {
-    navigate(`/selectSeat/${trip.id}`); 
+    navigate(`/bookingLayout/${trip.id}/selectSeat?passengers=${passengerCount}`); 
   };
 
   return (

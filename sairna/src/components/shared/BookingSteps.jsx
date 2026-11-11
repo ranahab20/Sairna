@@ -27,7 +27,7 @@ function BookingSteps() {
         </div>
         <div className="">
           <Link
-            to="/"
+            to="/Booking"
             className="items-center text-muted font-bold hover:text-primary flex gap-3"
           >
             <MdArrowForward size={20} color="#718493"  />
