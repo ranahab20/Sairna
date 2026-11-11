@@ -11,10 +11,12 @@ import { FaCalendarAlt, FaArrowLeft, FaSortAmountDown } from "react-icons/fa";
 
 function Booking() {
   const [searchParams] = useSearchParams();
-
-  const [selectedCompany, setSelectedCompany] = useState("all");
-  const [sortBy, setSortBy] = useState("earliest");
-  const [selectedTime, setSelectedTime] = useState("all");
+  
+  // const [selectedCompany, setSelectedCompany] = useState('all');
+  const initialCompany = searchParams.get('companyId') || 'all';
+const [selectedCompany, setSelectedCompany] = useState(initialCompany);
+  const [sortBy, setSortBy] = useState('earliest');
+  const [selectedTime, setSelectedTime] = useState('all');
 
   const originId = searchParams.get("from");
   const destinationId = searchParams.get("to");
