@@ -51,7 +51,7 @@ function CompanyCard({ company }) {
 
       {/* 2. اسم الشركة والوصف */}
       <div className="mb-20 flex-1">
-        <h3 className="text-lg font-bold text-text mb-1">{company.name}</h3>
+        <h3 className="text-lg font-bold text-text mb-3">{company.name}</h3>
         <p className="text-xs text-muted leading-relaxed">{style.desc}</p>
       </div>
 
