@@ -1,11 +1,9 @@
 import { useGetCompanies } from '../../../api/companies';
-import { FaBus, FaStar , FaArrowLeft } from 'react-icons/fa';
+import { FaBus, FaStar } from 'react-icons/fa';
 
 function CompanyPicker({ selectedCompany, onSelectCompany }) {
-  
   const { data: companies, isLoading } = useGetCompanies();
 
-  
   const companyStyles = {
     1: { char: 'ش', color: 'text-[#109d9c]', bg: 'bg-[#e7f9f6]' }, // الشام
     2: { char: 'ف', color: 'text-[#e69a46]', bg: 'bg-[#fff3df]' }, // الفرات
@@ -17,7 +15,6 @@ function CompanyPicker({ selectedCompany, onSelectCompany }) {
 
   return (
     <div className="mb-8">
-      <div className='flex justify-between'>
       <div className="flex items-center gap-3 mb-4">
         <span className="w-8 h-8 flex items-center justify-center bg-soft-teal text-primary font-bold rounded-lg">01</span>
         <div>
@@ -25,21 +22,14 @@ function CompanyPicker({ selectedCompany, onSelectCompany }) {
           <p className="text-xs text-muted">حدد الشركة اللي بتفضّلها، ومنعرضلك مواعيدها المتاحة.</p>
         </div>
       </div>
-      <div className='flex flex-row gap-1 items-center mb-4'>
-        <span className='text-muted text-xs font-bold'>02  </span>
-        <FaArrowLeft className='text-muted font-thin'/>
-        <span className='text-muted font-bold text-[11px]'>اختار الوقت والمقعد</span>
-      </div>
-      </div>
 
-    
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3">
         
-        
+        {/* زر "كل الشركات" */}
         <button
           onClick={() => onSelectCompany('all')}
           className={`flex flex-col items-center justify-center p-4 rounded-xl border-2 transition-all ${
-            selectedCompany === 'all' 
+            selectedCompany?.toString() === 'all' // تم التعديل هون
               ? 'border-primary bg-soft-teal/30' 
               : 'border-border bg-surface hover:border-primary/50'
           }`}
@@ -51,7 +41,7 @@ function CompanyPicker({ selectedCompany, onSelectCompany }) {
           <span className="text-[10px] text-muted">قارن الخيارات</span>
         </button>
 
-        
+        {/* باقي الشركات */}
         {companies?.map((company, index) => {
           const style = companyStyles[company.id] || { char: company.name[0], color: 'text-primary', bg: 'bg-soft-teal' };
           
@@ -60,7 +50,7 @@ function CompanyPicker({ selectedCompany, onSelectCompany }) {
               key={company.id}
               onClick={() => onSelectCompany(company.id)}
               className={`flex flex-col items-center justify-center p-4 rounded-xl border-2 transition-all ${
-                selectedCompany === company.id 
+                selectedCompany?.toString() === company.id?.toString() // تم التعديل هون
                   ? 'border-primary bg-soft-teal/30' 
                   : 'border-border bg-surface hover:border-primary/50'
               }`}
