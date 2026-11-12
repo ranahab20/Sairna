@@ -77,7 +77,7 @@ function TripCard({ trip,passengerCount=1 }) {
           </div>
 
           <button 
-            onClick={() => navigate(`/selectSeat/${trip.id}`)}
+            onClick={() => navigate(`/bookingLayout/${trip.id}/selectSeat?passengers=${passengerCount}`)}
             className="bg-primary hover:bg-primary-deep text-white px-4 md:px-5 py-2 md:py-3 rounded-xl font-bold flex items-center gap-2 transition-colors whitespace-nowrap text-sm md:text-base"
           >
             اختيار المقاعد <FaArrowLeft />
