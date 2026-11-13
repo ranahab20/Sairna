@@ -43,6 +43,7 @@ function SelectSeat() {
       return [...prev, seatNumber];
     });
   }
+  
 
   return (
     <section className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm lg:p-8">
