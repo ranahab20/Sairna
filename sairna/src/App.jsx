@@ -8,7 +8,10 @@ import BookingLayout from "./layouts/BookingLayout";
 import SelectSeat from "./pages/selectSeat/SelectSeat";
 import Booking from "./pages/booking/Booking";
 import PassengerInfo from "./pages/PassengerInfo/PassengerInfo";
-import Companies from "./pages/companies/Companies"
+import Companies from "./pages/companies/Companies";
+import Account from "./pages/account/Account";
+import Login from "./pages/auth/Login";
+import Register from "./pages/auth/Register";
 function App() {
   return (
     <>
@@ -23,7 +26,10 @@ function App() {
             <Route path="selectSeat" element={<SelectSeat />} />
             <Route path="passengerinfo" element={<PassengerInfo/>}/>
           </Route>
-        </Route>
+          <Route path="/login" element={<Login/>}/>
+          <Route path="/register" element={<Register/>}/>
+          <Route path="/account" element={<Account/>}/>
+          </Route>
       </Routes>
     </>
   );
