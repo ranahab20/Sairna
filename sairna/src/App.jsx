@@ -12,6 +12,8 @@ import Companies from "./pages/companies/Companies";
 import Account from "./pages/account/Account";
 import Login from "./pages/auth/Login";
 import Register from "./pages/auth/Register";
+import Confirm from "./pages/Confirm/Confirm";
+import Ticket from "./pages/Ticket/Ticket";
 function App() {
   return (
     <>
@@ -24,12 +26,14 @@ function App() {
           <Route path="/company" element={<Companies />} />
           <Route path="bookingLayout/:tripId" element={<BookingLayout />}>
             <Route path="selectSeat" element={<SelectSeat />} />
-            <Route path="passengerinfo" element={<PassengerInfo/>}/>
+            <Route path="passengerinfo" element={<PassengerInfo />} />
+            <Route path="confirm" element={<Confirm />} />
           </Route>
-          <Route path="/login" element={<Login/>}/>
-          <Route path="/register" element={<Register/>}/>
-          <Route path="/account" element={<Account/>}/>
-          </Route>
+          <Route path="ticket" element={<Ticket />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/account" element={<Account />} />
+        </Route>
       </Routes>
     </>
   );

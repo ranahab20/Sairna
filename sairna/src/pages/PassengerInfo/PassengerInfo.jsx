@@ -72,9 +72,7 @@ function PassengerInfo() {
 
     const newErrors = {};
 
-    if (selectedSeats.length !== passengerCount) {
-      newErrors.seats = "يرجى اختيار جميع المقاعد المطلوبة.";
-    }
+    
 
     passengers.forEach((passenger, index) => {
       if (!passenger.passengerName.trim()) {
@@ -94,7 +92,7 @@ function PassengerInfo() {
 
     // Move to confirmation page
     navigate(
-      `/bookingLayout/${tripId}/confirmReservation?passengers=${passengerCount}`,
+      `/bookingLayout/${tripId}/confirm?passengers=${passengerCount}`,
     );
   };
 

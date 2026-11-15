@@ -1,14 +1,35 @@
-import { LuArmchair, LuInfo } from "react-icons/lu";
+import { LuArmchair, LuInfo, LuArrowLeft } from "react-icons/lu";
+
 import Button from "../../../components/shared/Button";
 import { useNavigate } from "react-router-dom";
-const SeatSelectionInfo = ({ selectedSeats = [], passengerCount = 1,trip }) => {
-    const navigate = useNavigate();
 
-  const handleComplete1=()=>{
-    navigate(`/bookingLayout/${trip.id}/passengerinfo?passengers=${passengerCount}`)
-  }
+const SeatSelectionInfo = ({
+  selectedSeats = [],
+  passengerCount = 1,
+  trip,
+}) => {
+  const navigate = useNavigate();
+
+  // Check whether all required seats are selected
+  const isSelectionComplete = selectedSeats.length === passengerCount;
+
+  // Remaining seats
+  const remainingSeats = Math.max(0, passengerCount - selectedSeats.length);
+
+  // Navigate to PassengerInfo
+  const handleComplete = () => {
+    // Prevent navigation if seats are incomplete
+    if (!isSelectionComplete || !trip?.id) {
+      return;
+    }
+
+    navigate(
+      `/bookingLayout/${trip.id}/passengerInfo?passengers=${passengerCount}`,
+    );
+  };
+
   return (
-    <div className="flex flex-col gap-4">
+    <div dir="rtl" className="flex flex-col gap-4">
       {/* Information card */}
       <div className="rounded-2xl border border-slate-200 bg-white p-6">
         <div className="flex flex-col items-end gap-4">
@@ -60,18 +81,27 @@ const SeatSelectionInfo = ({ selectedSeats = [], passengerCount = 1,trip }) => {
       {/* Hint */}
       <div className="flex items-center justify-between gap-3 rounded-xl bg-[#e5f7f3] p-4 text-sm text-[#00a99d]">
         <p className="font-medium">
-          أكمل اختيار عدد مقاعد مساوي لعدد المسافرين.
+          {isSelectionComplete
+            ? "ممتاز! اخترت جميع المقاعد المطلوبة."
+            : `باقي اختيار ${remainingSeats} مقعد لإكمال الحجز.`}
         </p>
+
         <LuInfo size={21} className="shrink-0" />
       </div>
+
+      {/* Continue button */}
       <Button
         type="button"
         variant="primary"
         color="primary"
         radius="rounded-[17px]"
-        onClick={handleComplete1}
-        className=" w-full min-h-[52px] !p-0 flex items-center justify-center"
-      > متابعة الحجز</Button>
+        onClick={handleComplete}
+        disabled={!isSelectionComplete || !trip?.id}
+        className="w-full min-h-[52px] flex items-center justify-center gap-3"
+      >
+        متابعة الحجز
+        <LuArrowLeft size={19} />
+      </Button>
     </div>
   );
 };
