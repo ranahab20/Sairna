@@ -14,6 +14,7 @@ import Login from "./pages/auth/Login";
 import Register from "./pages/auth/Register";
 import Confirm from "./pages/Confirm/Confirm";
 import Ticket from "./pages/Ticket/Ticket";
+import Follow from "./pages/follow/Follow";
 function App() {
   return (
     <>
@@ -33,6 +34,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/account" element={<Account />} />
+          <Route path="/follow" element={<Follow/>}/>
         </Route>
       </Routes>
     </>
