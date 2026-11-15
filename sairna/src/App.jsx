@@ -8,8 +8,12 @@ import BookingLayout from "./layouts/BookingLayout";
 import SelectSeat from "./pages/selectSeat/SelectSeat";
 import Booking from "./pages/booking/Booking";
 import PassengerInfo from "./pages/PassengerInfo/PassengerInfo";
-import Companies from "./pages/companies/Companies"
-function App() {
+import Companies from "./pages/companies/Companies";
+import Login from './pages/auth/Login';
+ import Register from './pages/auth/Register';
+ import Account from './pages/account/Account';
+import MyTravels from "./pages/myTravels/MyTravels";
+function App() { 
   return (
     <>
       <Routes>
@@ -21,7 +25,8 @@ function App() {
           <Route path="/company" element={<Companies />} />
           <Route path="/login" element={<Login />} />  
           <Route path= "/register" element= {<Register/>}></Route> 
-          <Route path= "/account" element={<Account />}/>    
+          <Route path= "/account" element={<Account />}/> 
+          <Route path="/myTravels" element={<MyTravels />} />   
           <Route path="bookingLayout/:tripId" element={<BookingLayout />}>
             <Route path="selectSeat" element={<SelectSeat />} />
             <Route path="passengerinfo" element={<PassengerInfo/>}/>
