@@ -36,8 +36,12 @@ function Ticket() {
     );
   }
 
-  // Support common response structures
-  const bookingData = reservation.data || reservation.booking || reservation;
+  // Support common backend response structures
+  const bookingData =
+    reservation.data?.booking ||
+    reservation.data ||
+    reservation.booking ||
+    reservation;
 
   const bookingNumber =
     bookingData.bookingNumber ||
@@ -56,6 +60,24 @@ function Ticket() {
         typeof seat === "object" ? seat.seatNumber : seat,
       )
     : selectedSeats;
+
+  const tripId = trip?.id || bookingData.tripId || bookingData.trip?.id;
+
+  // Navigate to Follow with trip information
+  function handleFollow() {
+    if (!tripId) {
+      navigate("/follow");
+      return;
+    }
+
+    navigate(`/follow?tripId=${tripId}`, {
+      state: {
+        trip,
+        reservation,
+        selectedSeats: bookedSeats,
+      },
+    });
+  }
 
   return (
     <main
@@ -122,6 +144,7 @@ function Ticket() {
 
         {/* Action buttons */}
         <div className="mt-7 flex flex-col justify-center gap-3 sm:flex-row">
+          {/* My reservations */}
           <Button
             type="button"
             variant="primary"
@@ -131,17 +154,16 @@ function Ticket() {
             className="flex min-h-[60px] items-center justify-center gap-3 px-7 font-bold"
           >
             <LuTicket size={20} />
-            عرض تذكرتي
+            حجوزاتي
           </Button>
 
+          {/* Follow trip */}
           <Button
             type="button"
             variant="outline"
             color="secondary"
             radius="rounded-2xl"
-            onClick={() =>
-              navigate(`/follow?tripId=${trip?.id || bookingData.tripId || ""}`)
-            }
+            onClick={handleFollow}
             className="flex min-h-[60px] items-center justify-center gap-3 px-7 font-bold"
           >
             <LuRoute size={20} />

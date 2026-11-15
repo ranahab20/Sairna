@@ -9,11 +9,13 @@ import SelectSeat from "./pages/selectSeat/SelectSeat";
 import Booking from "./pages/booking/Booking";
 import PassengerInfo from "./pages/PassengerInfo/PassengerInfo";
 import Companies from "./pages/companies/Companies";
+import MyTravels from "./pages/myTravels/MyTravels";
 import Account from "./pages/account/Account";
 import Login from "./pages/auth/Login";
 import Register from "./pages/auth/Register";
 import Confirm from "./pages/Confirm/Confirm";
 import Ticket from "./pages/Ticket/Ticket";
+import Follow from "./pages/follow/Follow";
 function App() {
   return (
     <>
@@ -24,15 +26,17 @@ function App() {
           <Route path="/about" element={<About />}></Route>
           <Route path="/support" element={<Support />}></Route>
           <Route path="/company" element={<Companies />} />
+          <Route path="/login" element={<Login />} />  
+          <Route path= "/register" element= {<Register/>}></Route> 
+          <Route path= "/account" element={<Account />}/> 
+          <Route path="/myTravels" element={<MyTravels />} />   
           <Route path="bookingLayout/:tripId" element={<BookingLayout />}>
             <Route path="selectSeat" element={<SelectSeat />} />
             <Route path="passengerinfo" element={<PassengerInfo />} />
             <Route path="confirm" element={<Confirm />} />
           </Route>
           <Route path="ticket" element={<Ticket />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/account" element={<Account />} />
+          <Route path="/follow" element={<Follow/>}/>
         </Route>
       </Routes>
     </>

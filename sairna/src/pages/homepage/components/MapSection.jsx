@@ -53,7 +53,7 @@ function MapSection() {
               <span className="text-gray-500 font-semibold">حلب – دمشق</span>
             </div>
 
-            <Map/>
+            <Map />
             <div className="w-full"></div>
 
             {/* Route Progress Bar Footer */}
