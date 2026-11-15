@@ -2,7 +2,7 @@ function StepCard({ icon, title, paragraph, number, className }) {
   return (
     <>
       <div
-        className={`border border-[#fff] rounded-3xl relative transition duration-300 p-[30px] bg-white group shadow-md hover:-translate-y-2 transition-all duration-300`}
+        className={`border border-border rounded-3xl relative transition duration-300 p-[30px] bg-surface group shadow-md hover:-translate-y-2 transition-all duration-300`}
       >
         <div className={`w-[60px] h-[60px] mb-5 rounded-2xl ${className}`}>
           {icon}
