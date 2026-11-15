@@ -6,8 +6,10 @@ import { useSeats } from "../../api/seats";
 
 import SeatMap from "./components/SeatMap";
 import SeatSelectionInfo from "./components/SeatSelectionInfo";
+import { useState } from "react";
 
 function SelectSeat() {
+  
   // Get shared data from BookingLayout
   const { tripId,tripData, selectedSeats, setSelectedSeats, passengerCount } =
     useOutletContext();
@@ -42,7 +44,7 @@ function SelectSeat() {
 
       return [...prev, seatNumber];
     });
-  }
+  }  
 
   return (
     <section className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm lg:p-8">
