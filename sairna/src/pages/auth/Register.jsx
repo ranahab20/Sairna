@@ -9,11 +9,19 @@ import imgDamascus from "../../assets/image.jpg";
 
 function Register() {
   const [form, setForm] = useState({ name: "", email: "", password: "" });
+  const [passwordError, setPasswordError] = useState("");
   const { mutate: register, isPending, isError, error } = useRegister();
   const navigate = useNavigate();
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    
+    if (form.password.length < 8) {
+      setPasswordError("كلمة المرور يجب أن تكون 8 أحرف على الأقل.");
+      return;
+    }
+    setPasswordError("");
+
     register(form, {
       onSuccess: (data) => {
         setToken(data.accessToken);
@@ -26,13 +34,15 @@ function Register() {
   const handleChange = (event) => {
     const { name, value } = event.target;
     setForm((current) => ({ ...current, [name]: value }));
+    if (name === "password" && value.length >= 8) {
+      setPasswordError("");
+    }
   };
 
   return (
     <main className="min-h-screen bg-bg-main py-10 px-4 flex items-center justify-center">
       <div className="w-full max-w-6xl bg-surface rounded-3xl shadow-xl border border-border overflow-hidden grid grid-cols-1 lg:grid-cols-2">
         
-       
         <div className="p-8 md:p-12 lg:p-16 flex flex-col justify-center">
           
           <div className="text-center mb-8">
@@ -69,18 +79,23 @@ function Register() {
               icon={<FaEnvelope />}
             />
 
-            <CustomInput
-              label="كلمة المرور"
-              name="password"
-              type="password" 
-              value={form.password}
-              onChange={handleChange}
-              placeholder="6 أحرف على الأقل"
-              required
-              dir="ltr"
-              autoComplete="new-password"
-              icon={<FaLock />}
-            />
+            <div>
+              <CustomInput
+                label="كلمة المرور"
+                name="password"
+                type="password" 
+                value={form.password}
+                onChange={handleChange}
+                placeholder="8 أحرف على الأقل"
+                required
+                dir="ltr"
+                autoComplete="new-password"
+                icon={<FaLock />}
+              />
+              {passwordError && (
+                <p className="text-xs text-red-500 font-bold mt-1">{passwordError}</p>
+              )}
+            </div>
 
             <label className="flex items-center gap-2 text-xs text-muted font-bold mt-2">
               <input type="checkbox" required className="accent-primary" /> 
@@ -112,7 +127,6 @@ function Register() {
           </p>
         </div>
 
-        {/* القسم الأيسر: الصورة والخلفية */}
         <div className="hidden lg:flex flex-col justify-between bg-gradient-to-br from-[#123e51] to-[#1b7176] p-12 relative overflow-hidden">
           <div className="relative z-10">
             <span className="inline-flex items-center gap-2 bg-white/10 text-white px-4 py-1.5 rounded-full text-xs font-bold mb-6">

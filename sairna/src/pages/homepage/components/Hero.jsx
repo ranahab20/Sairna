@@ -35,19 +35,19 @@ function Hero() {
             <div className=" hidden md:flex items-center gap-4 justify-start">
               {/* Colored Letters */}
               <div className="flex -space-x-3 ">
-                <span className="w-10 h-10 border-[2.5px] border-white rounded-full bg-[#f8d7b0] text-[#5e3a36] font-bold flex items-center justify-center text-sm shadow-sm">
+                <span className="w-10 h-10 border-[2.5px] border-border rounded-full bg-[#f8d7b0] text-[#5e3a36] font-bold flex items-center justify-center text-sm shadow-sm">
                   م
                 </span>
 
-                <span className="w-10 h-10 border-[2.5px] border-white rounded-full bg-[#c5dedd] text-[#5e3a36] font-bold flex items-center justify-center text-sm shadow-sm">
+                <span className="w-10 h-10 border-[2.5px] border-border rounded-full bg-[#c5dedd] text-[#5e3a36] font-bold flex items-center justify-center text-sm shadow-sm">
                   س
                 </span>
 
-                <span className="w-10 h-10 border-[2.5px] border-white rounded-full bg-[#e8c3d3] text-[#5e3a36] font-bold flex items-center justify-center text-sm shadow-sm">
+                <span className="w-10 h-10 border-[2.5px] border-border rounded-full bg-[#e8c3d3] text-[#5e3a36] font-bold flex items-center justify-center text-sm shadow-sm">
                   ع
                 </span>
 
-                <span className="w-10 h-10 border-[2.5px] border-white rounded-full bg-[#bfd8f3] text-[#5e3a36] font-bold flex items-center justify-center text-sm shadow-sm">
+                <span className="w-10 h-10 border-[2.5px] border-border rounded-full bg-[#bfd8f3] text-[#5e3a36] font-bold flex items-center justify-center text-sm shadow-sm">
                   ر
                 </span>
               </div>
@@ -78,14 +78,14 @@ function Hero() {
             <span className="absolute bottom-[2px] left-3.5 bg-[#0c2b35]/72 rounded-[10px] py-[5px] px-[11px] text-amber-50">
               صورة حقيقية من دمشق
             </span>
-            <div className="bg-white [transform:translate3d(0,var(--float-distance),0)_rotate(1.5deg)] rounded-[10px] absolute top-[25px] left-[-26px] py-[10px] px-[15px] flex">
+            <div className="bg-surface [transform:translate3d(0,var(--float-distance),0)_rotate(1.5deg)] rounded-[10px] absolute top-[25px] left-[-26px] py-[10px] px-[15px] flex">
               <div>
                 <b>14 محافظة</b>
                 <p>وجهات بتجمعنا</p>
               </div>
               <GrLocation color="#0aa99b" size={24} />
             </div>
-            <div className="bg-white transform rotate-[1.5deg]  rounded-[10px] absolute bottom-[25px] right-[-26px] py-[10px] px-[15px] flex">
+            <div className="bg-surface transform rotate-[1.5deg]  rounded-[10px] absolute bottom-[25px] right-[-26px] py-[10px] px-[15px] flex">
               <div>
                 <b>سافر براحة</b>
                 <p>من أول حجز لآخر محطة</p>
