@@ -12,6 +12,7 @@ function BookingLayout() {
 
   // Shared booking state
   const [selectedSeats, setSelectedSeats] = useState([]);
+  const [passengerDetails, setPassengerDetails] = useState([]);
   const [searchParams] = useSearchParams();
 
   const passengersParam = Number(searchParams.get("passengers"));
@@ -70,6 +71,8 @@ function BookingLayout() {
                 selectedSeats,
                 setSelectedSeats,
                 passengerCount,
+                passengerDetails,
+                setPassengerDetails,
               }}
             />
           </main>
