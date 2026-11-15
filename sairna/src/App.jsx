@@ -9,11 +9,7 @@ import SelectSeat from "./pages/selectSeat/SelectSeat";
 import Booking from "./pages/booking/Booking";
 import PassengerInfo from "./pages/PassengerInfo/PassengerInfo";
 import Companies from "./pages/companies/Companies";
-import Login from './pages/auth/Login';
- import Register from './pages/auth/Register';
- import Account from './pages/account/Account';
 import MyTravels from "./pages/myTravels/MyTravels";
-function App() { 
 import Account from "./pages/account/Account";
 import Login from "./pages/auth/Login";
 import Register from "./pages/auth/Register";
@@ -39,9 +35,9 @@ function App() {
             <Route path="confirm" element={<Confirm />} />
           </Route>
           <Route path="ticket" element={<Ticket />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/account" element={<Account />} />
+          {/* <Route path="/login" element={<Login />} /> */}
+          {/* <Route path="/register" element={<Register />} /> */}
+          {/* <Route path="/account" element={<Account />} /> */}
         </Route>
       </Routes>
     </>
