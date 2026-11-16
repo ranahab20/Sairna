@@ -19,7 +19,7 @@ function TravelCard({ booking, onShowTicket }) {
 
   // وظيفة زر التتبع
   const handleTrackTrip = () => {
-    navigate('/follow');
+       navigate(`/follow?tripId=${trip.id}`);
   };
 
   return (
@@ -87,6 +87,7 @@ function TravelCard({ booking, onShowTicket }) {
       <div className="px-5 py-4 border-t border-border flex justify-start gap-3 bg-surface">
         <button 
           onClick={handleTrackTrip}
+           disabled={booking.status !== 'CONFIRMED'}
           className="flex items-center gap-2 px-4 py-2 border border-border rounded-lg text-sm font-bold text-text hover:bg-surface-alt transition-colors"
         >
           تتبع الرحلة <FaBus />
